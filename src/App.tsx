@@ -1,100 +1,77 @@
-import React from "react"
-import * as ReactDOM from "react-dom"
-import { TodoListItemProps, TodoListProps } from "./utils/types"
+import { ChangeEvent, useState } from "react"
+import { TodoItemProps, TodoListItem, TodoListProps } from "./utils/types"
 
-class TodoApp extends React.Component {
-  constructor(props) {
-    super(props)
+function TodoApp() {
+  const [items, setItems] = useState<TodoListItem[]>([])
+  const [text, setText] = useState("")
 
-    this.state = {
-      items: [],
-      text: "",
-    }
-
-    this.handleTextChange = this.handleTextChange.bind(this)
-    this.handleAddItem = this.handleAddItem.bind(this)
-    this.markItemCompleted = this.markItemCompleted.bind(this)
-    this.handleDeleteItem = this.handleDeleteItem.bind(this)
+  const handleTextChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setText(event.target.value)
   }
-  handleTextChange(event) {
-    this.setState({
-      text: event.target.value,
-    })
-  }
-  handleAddItem(event) {
-    event.preventDefault()
-
+  const handleAddItem = () => {
     const newItem = {
       id: Date.now(),
-      text: this.state.text,
+      text: text,
       done: false,
     }
 
-    this.setState((prevState) => ({
-      items: prevState.items.concat(newItem),
-      text: "",
-    }))
+    setItems((state) => [...state, newItem])
   }
-  markItemCompleted(itemId) {
-    const updatedItems = this.state.items.map((item) => {
+
+  const markItemCompleted = (itemId: number) => {
+    const updatedItems = items.map((item) => {
       if (itemId === item.id) item.done = !item.done
 
       return item
     })
 
-    // State Updates are Merged
-    this.setState({
-      items: [].concat(updatedItems),
-    })
+    setItems(updatedItems)
   }
-  handleDeleteItem(itemId) {
-    const updatedItems = this.state.items.filter((item) => {
+
+  const handleDeleteItem = (itemId: number) => {
+    const updatedItems = items.filter((item) => {
       return item.id !== itemId
     })
 
-    this.setState({
-      items: [].concat(updatedItems),
-    })
+    setItems(updatedItems)
   }
-  render() {
-    return (
-      <div>
-        <h3 className="apptitle">TO DO LIST</h3>
-        <div className="row">
-          <div className="col-md-3">
-            <TodoList
-              items={this.state.items}
-              onItemCompleted={this.markItemCompleted}
-              onDeleteItem={this.handleDeleteItem}
-            />
-          </div>
+  return (
+    <div>
+      <h3 className="apptitle">TO DO LIST</h3>
+      <div className="row">
+        <div className="col-md-3">
+          <TodoList
+            items={items}
+            onItemCompleted={markItemCompleted}
+            onDeleteItem={handleDeleteItem}
+          />
         </div>
-        <form className="row">
-          <div className="col-md-3">
-            <input
-              type="text"
-              className="form-control"
-              onChange={this.handleTextChange}
-              value={this.state.text}
-            />
-          </div>
-          <div className="col-md-3">
-            <button
-              className="btn btn-primary"
-              onClick={this.handleAddItem}
-              disabled={!this.state.text}
-            >
-              {"Add #" + (this.state.items.length + 1)}
-            </button>
-          </div>
-        </form>
       </div>
-    )
-  }
+      <form className="row">
+        <div className="col-md-3">
+          <input
+            type="text"
+            className="form-control"
+            onChange={handleTextChange}
+            value={text}
+          />
+        </div>
+        <div className="col-md-3">
+          <button
+            className="btn btn-primary"
+            onClick={handleAddItem}
+            disabled={!text}
+          >
+            {"Add #" + (items.length + 1)}
+          </button>
+        </div>
+      </form>
+    </div>
+  )
 }
 
-function TodoItem(props: TodoListItemProps) {
-  const { onDeleteItem, done, id, onItemCompleted, text } = props
+function TodoItem(props: TodoItemProps) {
+  const { onDeleteItem, completed, id, onItemCompleted, text } = props
   const markCompleted = () => {
     onItemCompleted(id)
   }
@@ -103,7 +80,7 @@ function TodoItem(props: TodoListItemProps) {
     onDeleteItem(id)
   }
 
-  const itemClass = "form-check todoitem " + (done ? "done" : "undone")
+  const itemClass = "form-check todoitem " + (completed ? "done" : "undone")
 
   //TODO Highlight newly added item for several seconds.
 
@@ -129,7 +106,7 @@ function TodoItem(props: TodoListItemProps) {
 }
 
 function TodoList(props: TodoListProps) {
-  const { items } = props
+  const { items, onDeleteItem, onItemCompleted } = props
 
   return (
     <ul className="todolist">
@@ -139,8 +116,8 @@ function TodoList(props: TodoListProps) {
           id={item.id}
           text={item.text}
           completed={item.done}
-          onItemCompleted={item.onItemCompleted}
-          onDeleteItem={item.onDeleteItem}
+          onItemCompleted={onItemCompleted}
+          onDeleteItem={onDeleteItem}
         />
       ))}
     </ul>

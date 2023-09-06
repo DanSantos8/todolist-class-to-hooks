@@ -1,11 +1,19 @@
-export interface TodoListItemProps {
-  id: Date
+export interface TodoListItem {
+  id: number
   text: string
   done: boolean
-  onItemCompleted: () => void
-  onDeleteItem: () => void
+}
+
+export interface TodoItemProps {
+  id: number
+  text: string
+  completed: boolean
+  onItemCompleted: (itemId: number) => void
+  onDeleteItem: (itemId: number) => void
 }
 
 export interface TodoListProps {
-  items: TodoListItemProps[]
+  items: TodoListItem[]
+  onItemCompleted: (itemId: number) => void
+  onDeleteItem: (itemId: number) => void
 }
