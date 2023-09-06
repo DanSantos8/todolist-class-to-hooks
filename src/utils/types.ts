@@ -17,3 +17,34 @@ export interface TodoListProps {
   onItemCompleted: (itemId: number) => void
   onDeleteItem: (itemId: number) => void
 }
+
+export interface IList {
+  id: number
+  name: string
+  todos: TodoListItem[]
+}
+
+export type Action =
+  | { type: "add_list_todos"; payload: IList }
+  | { type: "remove_list_todos"; payload: number }
+  | { type: "set_active_list_todos"; payload: number | undefined }
+  | { type: "add_todo"; payload: { item: TodoListItem; listId: number } }
+  | { type: "reset_active_list_todos" }
+  | { type: "update_status_todo"; payload: number }
+  | { type: "remove_todo_item"; payload: number }
+
+export interface State {
+  lists: IList[]
+  activeListTodos: {
+    id: number | undefined
+    todos: TodoListItem[]
+  }
+}
+
+export const initialState: State = {
+  lists: [],
+  activeListTodos: {
+    id: undefined,
+    todos: [],
+  },
+}

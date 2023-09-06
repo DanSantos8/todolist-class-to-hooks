@@ -1,51 +1,81 @@
-import { ChangeEvent, useState } from "react"
-import { TodoItemProps, TodoListItem, TodoListProps } from "./utils/types"
+import { ChangeEvent, useReducer, useState } from "react"
+import {
+  IList,
+  TodoItemProps,
+  TodoListProps,
+  initialState,
+} from "./utils/types"
+import { reducer } from "./reducer"
 
 function TodoApp() {
-  const [items, setItems] = useState<TodoListItem[]>([])
   const [text, setText] = useState("")
+  const [state, dispatch] = useReducer(reducer, initialState)
 
   const handleTextChange = (event: ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value)
   }
-  const handleAddItem = () => {
+
+  const markItemCompleted = (itemId: number) => {
+    dispatch({ type: "update_status_todo", payload: itemId })
+  }
+
+  const handleDeleteItem = (itemId: number) => {
+    dispatch({ type: "remove_todo_item", payload: itemId })
+  }
+
+  const handleAddItem = (id: number) => {
     const newItem = {
       id: Date.now(),
       text: text,
       done: false,
     }
 
-    setItems((state) => [...state, newItem])
+    dispatch({ type: "add_todo", payload: { item: newItem, listId: id } })
   }
 
-  const markItemCompleted = (itemId: number) => {
-    const updatedItems = items.map((item) => {
-      if (itemId === item.id) item.done = !item.done
-
-      return item
-    })
-
-    setItems(updatedItems)
+  const handleAddList = () => {
+    const newList = {
+      id: Date.now(),
+      name: text,
+      todos: [],
+    }
+    dispatch({ type: "add_list_todos", payload: newList })
   }
 
-  const handleDeleteItem = (itemId: number) => {
-    const updatedItems = items.filter((item) => {
-      return item.id !== itemId
-    })
+  const openTodosList = (id: number) => {
+    dispatch({ type: "set_active_list_todos", payload: id })
+  }
 
-    setItems(updatedItems)
+  const backToListTodos = () => {
+    dispatch({ type: "reset_active_list_todos" })
+  }
+
+  const handleSubmit = (id: number | undefined) => {
+    setText("")
+    if (id) {
+      handleAddItem(id!)
+    } else {
+      handleAddList()
+    }
+  }
+
+  const renderList = () => {
+    return state.activeListTodos.id ? (
+      <TodoList
+        items={state.activeListTodos.todos}
+        onItemCompleted={markItemCompleted}
+        onDeleteItem={handleDeleteItem}
+      />
+    ) : (
+      <List lists={state.lists} openTodosList={openTodosList} />
+    )
   }
   return (
     <div>
       <h3 className="apptitle">TO DO LIST</h3>
+      <button onClick={() => backToListTodos()}>Back to list</button>
       <div className="row">
-        <div className="col-md-3">
-          <TodoList
-            items={items}
-            onItemCompleted={markItemCompleted}
-            onDeleteItem={handleDeleteItem}
-          />
-        </div>
+        <div className="col-md-3">{renderList()}</div>
       </div>
       <form className="row">
         <div className="col-md-3">
@@ -58,11 +88,12 @@ function TodoApp() {
         </div>
         <div className="col-md-3">
           <button
+            type="button"
             className="btn btn-primary"
-            onClick={handleAddItem}
+            onClick={() => handleSubmit(state.activeListTodos.id)}
             disabled={!text}
           >
-            {"Add #" + (items.length + 1)}
+            {"Add #"}
           </button>
         </div>
       </form>
@@ -90,6 +121,7 @@ function TodoItem(props: TodoItemProps) {
         <input
           type="checkbox"
           className="form-check-input"
+          defaultChecked={completed}
           onChange={markCompleted}
         />
         {text}
@@ -119,6 +151,19 @@ function TodoList(props: TodoListProps) {
           onItemCompleted={onItemCompleted}
           onDeleteItem={onDeleteItem}
         />
+      ))}
+    </ul>
+  )
+}
+
+function List(props: { lists: IList[]; openTodosList: (id: number) => void }) {
+  const { lists, openTodosList } = props
+  return (
+    <ul>
+      {lists.map((list) => (
+        <li>
+          <button onClick={() => openTodosList(list.id)}>{list.name}</button>
+        </li>
       ))}
     </ul>
   )
