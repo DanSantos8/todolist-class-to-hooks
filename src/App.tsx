@@ -1,6 +1,6 @@
 import React from "react"
 import * as ReactDOM from "react-dom"
-import { TodoListProps } from "./utils/types"
+import { TodoListItemProps, TodoListProps } from "./utils/types"
 
 class TodoApp extends React.Component {
   constructor(props) {
@@ -93,58 +93,39 @@ class TodoApp extends React.Component {
   }
 }
 
-class TodoItem extends React.Component {
-  constructor(props) {
-    super(props)
-    this.markCompleted = this.markCompleted.bind(this)
-    this.deleteItem = this.deleteItem.bind(this)
+function TodoItem(props: TodoListItemProps) {
+  const { onDeleteItem, done, id, onItemCompleted, text } = props
+  const markCompleted = () => {
+    onItemCompleted(id)
   }
-  markCompleted(event) {
-    this.props.onItemCompleted(this.props.id)
-  }
-  deleteItem(event) {
-    this.props.onDeleteItem(this.props.id)
-  }
-  // Highlight newly added item for several seconds.
-  componentDidMount() {
-    if (this._listItem) {
-      // 1. Add highlight class.
-      this._listItem.classList.add("highlight")
 
-      // 2. Set timeout.
-      setTimeout(
-        (listItem) => {
-          // 3. Remove highlight class.
-          listItem.classList.remove("highlight")
-        },
-        500,
-        this._listItem
-      )
-    }
+  const deleteItem = () => {
+    onDeleteItem(id)
   }
-  render() {
-    const itemClass =
-      "form-check todoitem " + (this.props.completed ? "done" : "undone")
-    return (
-      <li className={itemClass} ref={(li) => (this._listItem = li)}>
-        <label className="form-check-label">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            onChange={this.markCompleted}
-          />{" "}
-          {this.props.text}
-        </label>
-        <button
-          type="button"
-          className="btn btn-danger btn-sm"
-          onClick={this.deleteItem}
-        >
-          x
-        </button>
-      </li>
-    )
-  }
+
+  const itemClass = "form-check todoitem " + (done ? "done" : "undone")
+
+  //TODO Highlight newly added item for several seconds.
+
+  return (
+    <li className={itemClass}>
+      <label className="form-check-label">
+        <input
+          type="checkbox"
+          className="form-check-input"
+          onChange={markCompleted}
+        />
+        {text}
+      </label>
+      <button
+        type="button"
+        className="btn btn-danger btn-sm"
+        onClick={deleteItem}
+      >
+        x
+      </button>
+    </li>
+  )
 }
 
 function TodoList(props: TodoListProps) {
