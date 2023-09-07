@@ -1,0 +1,16 @@
+export enum EmojisEnum {
+  smile_face = "\u{1F600}",
+  time = "\u{23F3}",
+  thunderbolt = "\u{26A1}",
+  camping = "\u{26FA}",
+  writing = "\u{270D}",
+  rainbow = "\u{1F308}",
+  tree = "\u{1F333}",
+  rose = "\u{1F339}",
+  leaves = "\u{1F343}",
+  watermelon = "\u{1F349}",
+  baloon = "\u{1F388}",
+  art = "\u{1F3A8}",
+  dice = "\u{1F3B2}",
+  yellow_heart = "\u{1F49B}",
+}
