@@ -7,6 +7,7 @@ export const Item = styled.li`
   font-weight: 400;
   transition: all 0.2s ease;
   gap: 12px;
+  border-radius: 8px;
 
   div {
     min-width: 45px;
@@ -14,7 +15,7 @@ export const Item = styled.li`
   }
 
   &:hover {
-    background-color: #ccc;
+    background-image: linear-gradient(to left, #aed6f1, #fff);
   }
 
   button {
@@ -24,5 +25,16 @@ export const Item = styled.li`
     text-align: left;
     border: none;
     cursor: pointer;
+    font-weight: 500;
   }
+`
+
+export const TodosQuantity = styled.span`
+  font-size: 10px;
+  font-weight: 500;
+  padding: 4px;
+  background-color: #ccc;
+  color: #333;
+  margin: 0 4px;
+  border-radius: 50%;
 `

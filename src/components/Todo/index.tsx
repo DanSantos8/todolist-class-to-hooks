@@ -79,7 +79,7 @@ export default function Todo() {
   return (
     <S.Layout>
       <S.Container>
-        <S.Title>TO DO LIST</S.Title>
+        {/* <S.Title>TO DO LIST</S.Title> */}
         {isTodoList && (
           <S.BackToListButton onClick={() => backToListTodos()}>
             Back to list

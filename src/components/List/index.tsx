@@ -14,6 +14,7 @@ export default function List(props: {
           name={list.name}
           openTodosList={openTodosList}
           emoji={list.emoji}
+          todosQuantity={list.todos.length}
         />
       ))}
     </S.Container>

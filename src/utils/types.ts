@@ -29,6 +29,7 @@ export interface ListItemProps {
   id: number
   name: string
   emoji: string
+  todosQuantity: number
   openTodosList: (itemId: number) => void
 }
 

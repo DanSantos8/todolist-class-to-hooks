@@ -9,6 +9,7 @@ export const Layout = styled.main`
   justify-content: center;
   max-width: 450px;
   margin: auto;
+  overflow-y: hidden;
 `
 export const Container = styled.div`
   display: flex;
@@ -19,6 +20,7 @@ export const Container = styled.div`
   background-color: white;
   padding: 24px;
   border-radius: 8px;
+  overflow-y: auto;
 `
 
 export const Title = styled.h3`
