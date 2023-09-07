@@ -9,6 +9,8 @@ export default function Todo() {
   const [text, setText] = useState("")
   const [state, dispatch] = useReducer(reducer, initialState)
 
+  const isTodoList = !!state.activeListTodos.id
+
   const handleTextChange = (event: ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value)
   }
@@ -58,7 +60,7 @@ export default function Todo() {
   }
 
   const renderList = () => {
-    return state.activeListTodos.id ? (
+    return isTodoList ? (
       <TodoList
         items={state.activeListTodos.todos}
         onItemCompleted={markItemCompleted}
@@ -69,26 +71,33 @@ export default function Todo() {
     )
   }
   return (
-    <div>
-      <S.Title>TO DO LIST</S.Title>
-      <S.BackToListButton onClick={() => backToListTodos()}>
-        Back to list
-      </S.BackToListButton>
-      <S.TaskList>{renderList()}</S.TaskList>
-      <S.TaskForm>
-        <div>
-          <S.TextInput type="text" onChange={handleTextChange} value={text} />
-        </div>
-        <div>
-          <S.AddButton
-            type="button"
-            onClick={() => handleSubmit(state.activeListTodos.id)}
-            disabled={!text}
-          >
-            Add
-          </S.AddButton>
-        </div>
-      </S.TaskForm>
-    </div>
+    <S.Layout>
+      <S.Container>
+        <S.Title>TO DO LIST</S.Title>
+        {isTodoList && (
+          <S.BackToListButton onClick={() => backToListTodos()}>
+            Back to list
+          </S.BackToListButton>
+        )}
+        {renderList()}
+        <S.TaskForm>
+          <S.AddItemContainer>
+            <S.AddButton
+              type="button"
+              onClick={() => handleSubmit(state.activeListTodos.id)}
+              disabled={!text}
+            >
+              +
+            </S.AddButton>
+            <S.TextInput
+              type="text"
+              placeholder={isTodoList ? "Create new todo" : "Create new list"}
+              onChange={handleTextChange}
+              value={text}
+            />
+          </S.AddItemContainer>
+        </S.TaskForm>
+      </S.Container>
+    </S.Layout>
   )
 }
