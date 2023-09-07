@@ -114,5 +114,11 @@ ul {
 }
 
 * {
+  font-family: "Roboto";
   box-sizing: border-box;
+}
+
+select {
+  appearance: none;
+  line-height: normal;
 }

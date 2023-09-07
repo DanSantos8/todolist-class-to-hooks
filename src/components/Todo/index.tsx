@@ -2,11 +2,14 @@ import { ChangeEvent, useReducer, useState } from "react"
 import { reducer } from "../../reducer"
 import { initialState } from "../../utils/types"
 import TodoList from "../TodoList"
-import ListTodosList from "../ListTodosList"
+import List from "../List"
 import * as S from "./styles"
+import Dropdown from "../Dropdown"
+import { EmojisEnum } from "../../utils/enums"
 
 export default function Todo() {
   const [text, setText] = useState("")
+  const [emoji, setEmoji] = useState<string>(EmojisEnum.smile_face)
   const [state, dispatch] = useReducer(reducer, initialState)
 
   const isTodoList = !!state.activeListTodos.id
@@ -37,6 +40,7 @@ export default function Todo() {
     const newList = {
       id: Date.now(),
       name: text,
+      emoji,
       todos: [],
     }
     dispatch({ type: "add_list_todos", payload: newList })
@@ -49,6 +53,8 @@ export default function Todo() {
   const backToListTodos = () => {
     dispatch({ type: "reset_active_list_todos" })
   }
+
+  const handleEmoji = (emoji: string) => setEmoji(emoji)
 
   const handleSubmit = (id: number | undefined) => {
     setText("")
@@ -67,7 +73,7 @@ export default function Todo() {
         onDeleteItem={handleDeleteItem}
       />
     ) : (
-      <ListTodosList lists={state.lists} openTodosList={openTodosList} />
+      <List lists={state.lists} openTodosList={openTodosList} />
     )
   }
   return (
@@ -80,21 +86,21 @@ export default function Todo() {
           </S.BackToListButton>
         )}
         {renderList()}
-        <S.TaskForm>
+        <S.TaskForm onSubmit={() => handleSubmit(state.activeListTodos.id)}>
           <S.AddItemContainer>
-            <S.AddButton
-              type="button"
-              onClick={() => handleSubmit(state.activeListTodos.id)}
-              disabled={!text}
-            >
-              +
-            </S.AddButton>
+            {!isTodoList && <Dropdown handleEmoji={handleEmoji} />}
             <S.TextInput
               type="text"
               placeholder={isTodoList ? "Create new todo" : "Create new list"}
               onChange={handleTextChange}
               value={text}
             />
+            <S.AddButton
+              onClick={() => handleSubmit(state.activeListTodos.id)}
+              disabled={!text}
+            >
+              +
+            </S.AddButton>
           </S.AddItemContainer>
         </S.TaskForm>
       </S.Container>

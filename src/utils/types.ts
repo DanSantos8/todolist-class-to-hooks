@@ -21,7 +21,15 @@ export interface TodoListProps {
 export interface IList {
   id: number
   name: string
+  emoji: string
   todos: TodoListItem[]
+}
+
+export interface ListItemProps {
+  id: number
+  name: string
+  emoji: string
+  openTodosList: (itemId: number) => void
 }
 
 export type Action =

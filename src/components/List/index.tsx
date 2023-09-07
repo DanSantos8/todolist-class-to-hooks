@@ -1,6 +1,7 @@
 import { IList } from "../../utils/types"
+import ListItem from "../ListItem"
 import * as S from "./styles"
-export default function ListTodosList(props: {
+export default function List(props: {
   lists: IList[]
   openTodosList: (id: number) => void
 }) {
@@ -8,9 +9,12 @@ export default function ListTodosList(props: {
   return (
     <S.Container>
       {lists.map((list) => (
-        <li key={list.id}>
-          <button onClick={() => openTodosList(list.id)}>{list.name}</button>
-        </li>
+        <ListItem
+          id={list.id}
+          name={list.name}
+          openTodosList={openTodosList}
+          emoji={list.emoji}
+        />
       ))}
     </S.Container>
   )
