@@ -7,9 +7,10 @@ export const TodoItem = styled.li`
   font-weight: 400;
   padding: 8px 0 8px 0;
   transition: all 0.2s ease;
+  border-radius: 8px;
 
   &:hover {
-    background-color: #ccc;
+    background-image: linear-gradient(to left, #aed6f1, #fff);
   }
 
   label {

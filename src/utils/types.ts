@@ -8,14 +8,10 @@ export interface TodoItemProps {
   id: number
   text: string
   completed: boolean
-  onItemCompleted: (itemId: number) => void
-  onDeleteItem: (itemId: number) => void
 }
 
 export interface TodoListProps {
   items: TodoListItem[]
-  onItemCompleted: (itemId: number) => void
-  onDeleteItem: (itemId: number) => void
 }
 
 export interface IList {
@@ -29,7 +25,7 @@ export interface ListItemProps {
   id: number
   name: string
   emoji: string
-  openTodosList: (itemId: number) => void
+  todosQuantity: number
 }
 
 export type Action =
@@ -40,8 +36,13 @@ export type Action =
   | { type: "reset_active_list_todos" }
   | { type: "update_status_todo"; payload: number }
   | { type: "remove_todo_item"; payload: number }
+  | { type: "edit_list_todos"; payload: IList }
+  | { type: "toggle_edit"; payload: boolean }
 
 export interface State {
+  controls: {
+    isEditing: boolean
+  }
   lists: IList[]
   activeListTodos: {
     id: number | undefined
@@ -50,6 +51,9 @@ export interface State {
 }
 
 export const initialState: State = {
+  controls: {
+    isEditing: false,
+  },
   lists: [],
   activeListTodos: {
     id: undefined,

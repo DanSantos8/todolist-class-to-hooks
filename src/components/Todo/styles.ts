@@ -9,6 +9,7 @@ export const Layout = styled.main`
   justify-content: center;
   max-width: 450px;
   margin: auto;
+  overflow-y: hidden;
 `
 export const Container = styled.div`
   display: flex;
@@ -19,6 +20,7 @@ export const Container = styled.div`
   background-color: white;
   padding: 24px;
   border-radius: 8px;
+  overflow-y: auto;
 `
 
 export const Title = styled.h3`
@@ -38,32 +40,3 @@ export const BackToListButton = styled.button`
 `
 
 export const TaskList = styled.div``
-
-export const TaskForm = styled.form``
-
-export const AddItemContainer = styled.div`
-  display: flex;
-  gap: 8px;
-  align-items: center;
-`
-
-export const TextInput = styled.input`
-  font-size: 12px;
-  padding: 10px;
-  width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  outline: none;
-`
-
-export const AddButton = styled.button`
-  background-color: #333;
-  color: #fff;
-  font-weight: 700;
-  font-size: 14px;
-  width: 25px;
-  height: 25px;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-`
