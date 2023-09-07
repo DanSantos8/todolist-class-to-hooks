@@ -1,15 +1,10 @@
 import { TodoItemProps } from "../../utils/types"
 import * as S from "./styles"
+import useTodoItem from "./useTodoItem"
 
 export default function TodoItem(props: TodoItemProps) {
-  const { onDeleteItem, completed, id, onItemCompleted, text } = props
-  const markCompleted = () => {
-    onItemCompleted(id)
-  }
-
-  const deleteItem = () => {
-    onDeleteItem(id)
-  }
+  const { completed, id, text } = props
+  const { deleteItem, markCompleted } = useTodoItem()
 
   const itemClass = "form-check todoitem " + (completed ? "done" : "undone")
 
@@ -21,11 +16,11 @@ export default function TodoItem(props: TodoItemProps) {
         <input
           type="checkbox"
           defaultChecked={completed}
-          onChange={markCompleted}
+          onChange={() => markCompleted(id)}
         />
         {text}
       </label>
-      <button type="button" onClick={deleteItem}>
+      <button type="button" onClick={() => deleteItem(id)}>
         x
       </button>
     </S.TodoItem>

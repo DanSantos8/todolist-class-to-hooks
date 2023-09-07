@@ -105,10 +105,28 @@ export function reducer(state: State, action: Action): State {
       )
 
       return {
+        ...state,
         lists: todosList,
         activeListTodos: {
           ...state.activeListTodos,
           todos: activeListTodos,
+        },
+      }
+    }
+    case "edit_list_todos": {
+      const updatedListTodosList = state.lists.map((list) => {
+        return list.id === action.payload.id ? action.payload : list
+      })
+      return {
+        ...state,
+        lists: updatedListTodosList,
+      }
+    }
+    case "toggle_edit": {
+      return {
+        ...state,
+        controls: {
+          isEditing: action.payload,
         },
       }
     }

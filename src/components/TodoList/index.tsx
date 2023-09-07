@@ -2,7 +2,7 @@ import { TodoListProps } from "../../utils/types"
 import TodoItem from "../TodoItem"
 import * as S from "./styles"
 export default function TodoList(props: TodoListProps) {
-  const { items, onDeleteItem, onItemCompleted } = props
+  const { items } = props
 
   return (
     <S.Container>
@@ -12,8 +12,6 @@ export default function TodoList(props: TodoListProps) {
           id={item.id}
           text={item.text}
           completed={item.done}
-          onItemCompleted={onItemCompleted}
-          onDeleteItem={onDeleteItem}
         />
       ))}
     </S.Container>
