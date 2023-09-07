@@ -1,63 +1,118 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
 
-/* .App {
-  font-family: sans-serif;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+b,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+  background-color: #333;
+  margin: 0;
+  height: 100vh;
+}
+ol,
+ul {
+  list-style: none;
 }
 
-.apptitle {
-  margin: 1rem 0;
-  color: #ff2968;
+* {
+  box-sizing: border-box;
 }
-
-.todolist {
-  padding-left: 0;
-
-  .todoitem {
-    position: relative;
-    margin-bottom: 0.25rem;
-    padding: 0.5rem 2rem 0.5rem 0.5rem;
-    border-top: 1px solid #ccc;
-
-    &.done {
-      .form-check-label {
-        color: #999;
-        text-decoration: line-through;
-      }
-    }
-
-    &.highlight {
-      border-color: #ff2968;
-      background-color: #ff8fb0;
-
-      &:last-child {
-        border-color: #ff2968;
-      }
-    }
-
-    &:last-child {
-      border-bottom: 1px solid #ccc;
-    }
-
-    .btn-danger {
-      position: absolute;
-      top: 0.5rem;
-      right: 0.5rem;
-    }
-
-    .form-check-label {
-      width: 100%;
-
-      .form-check-input {
-        margin-right: 1rem;
-      }
-    }
-  }
-}
-
-.container-fluid {
-  padding: 2rem;
-}
-
-h4 {
-  margin-bottom: 20px;
-} */

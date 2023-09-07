@@ -1,11 +1,11 @@
 import { TodoListProps } from "../../utils/types"
 import TodoItem from "../TodoItem"
-
+import * as S from "./styles"
 export default function TodoList(props: TodoListProps) {
   const { items, onDeleteItem, onItemCompleted } = props
 
   return (
-    <ul className="todolist">
+    <S.Container>
       {items.map((item) => (
         <TodoItem
           key={item.id}
@@ -16,6 +16,6 @@ export default function TodoList(props: TodoListProps) {
           onDeleteItem={onDeleteItem}
         />
       ))}
-    </ul>
+    </S.Container>
   )
 }
