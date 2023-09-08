@@ -34,6 +34,16 @@ export const Button = styled.button`
   font-weight: 500;
 `
 
+export const Remove = styled.button`
+  font-size: 10px;
+  border-radius: 4px;
+  color: white;
+  font-weight: 700;
+  border: none;
+  background-color: #ff7675;
+  cursor: pointer;
+`
+
 export const TodosQuantity = styled.span`
   font-size: 10px;
   font-weight: 500;
