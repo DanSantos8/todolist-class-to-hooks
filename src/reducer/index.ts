@@ -1,15 +1,12 @@
-import { Action, IList, State } from "../utils/types"
+import { IList } from "../utils/types"
+import { ActionsEnum } from "./enums"
+import { Action, State } from "./types"
 
 export function reducer(state: State, action: Action): State {
   switch (action.type) {
-    case "add_list_todos":
+    case ActionsEnum.ADD_LIST_TODOS:
       return { ...state, lists: [...state.lists, action.payload] }
-    case "remove_list_todos":
-      return {
-        ...state,
-        lists: [],
-      }
-    case "set_active_list_todos": {
+    case ActionsEnum.SET_ACTIVE_LIST_TODOS: {
       return {
         ...state,
         activeListTodos: {
@@ -19,7 +16,7 @@ export function reducer(state: State, action: Action): State {
         },
       }
     }
-    case "add_todo": {
+    case ActionsEnum.ADD_TODO: {
       const todos = state.lists.map((list) => {
         if (list.id === action.payload.listId)
           return {
@@ -39,7 +36,7 @@ export function reducer(state: State, action: Action): State {
         },
       }
     }
-    case "reset_active_list_todos": {
+    case ActionsEnum.RESET_ACTIVE_LIST_TODOS: {
       return {
         ...state,
         activeListTodos: {
@@ -48,7 +45,7 @@ export function reducer(state: State, action: Action): State {
         },
       }
     }
-    case "update_status_todo": {
+    case ActionsEnum.UPDATE_STATUS_TODO: {
       const todosList = state.lists.map((list) => {
         if (list.id === state.activeListTodos.id)
           return {
@@ -88,7 +85,7 @@ export function reducer(state: State, action: Action): State {
         },
       }
     }
-    case "remove_todo_item": {
+    case ActionsEnum.REMOVE_TODO_ITEM: {
       const todosList = state.lists.map((list) => {
         if (list.id === state.activeListTodos.id) {
           return {
@@ -113,7 +110,7 @@ export function reducer(state: State, action: Action): State {
         },
       }
     }
-    case "edit_todo_item": {
+    case ActionsEnum.EDIT_TODO_ITEM: {
       const currentList = state.activeListTodos
       const updatedTodos = state.activeListTodos.todos.map((todo) => {
         if (todo.id === action.payload.itemId) {
@@ -143,7 +140,7 @@ export function reducer(state: State, action: Action): State {
         },
       }
     }
-    case "delete_todos": {
+    case ActionsEnum.DELETE_TODOS: {
       const currentList = state.activeListTodos
       const updatedTodos = state.activeListTodos.todos.filter(
         (todo) => !action.payload.includes(todo.id)
@@ -170,7 +167,7 @@ export function reducer(state: State, action: Action): State {
       }
       return state
     }
-    case "toggle_edit": {
+    case ActionsEnum.TOGGLE_EDIT: {
       const currentList = state.activeListTodos.id
         ? state.activeListTodos.todos
         : state.lists
@@ -183,10 +180,10 @@ export function reducer(state: State, action: Action): State {
         },
       }
     }
-    case "remove_list_todo": {
+    case ActionsEnum.REMOVE_TODOS_LIST: {
       const updatedList = state.controls.currentList.filter(
         (list) => list.id !== action.payload
-      ) as IList[]
+      )
 
       return {
         ...state,
@@ -196,7 +193,7 @@ export function reducer(state: State, action: Action): State {
         },
       }
     }
-    case "edit_list_todos": {
+    case ActionsEnum.EDIT_LIST_TODOS: {
       const newListsNames = action.payload
 
       const updatedLists = state.controls.currentList.map((list) => {

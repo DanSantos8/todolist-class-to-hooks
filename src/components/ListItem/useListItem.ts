@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useGlobalContext } from "../../context/globalContext"
+import { ActionsEnum } from "../../reducer/enums"
 
 export default function useListItem(name: string) {
   const { dispatch } = useGlobalContext()
@@ -11,11 +12,11 @@ export default function useListItem(name: string) {
   }
 
   const openTodosList = (id: number) => {
-    dispatch({ type: "set_active_list_todos", payload: id })
+    dispatch({ type: ActionsEnum.SET_ACTIVE_LIST_TODOS, payload: id })
   }
 
   const removeItem = (id: number) => {
-    dispatch({ type: "remove_list_todo", payload: id })
+    dispatch({ type: ActionsEnum.REMOVE_TODOS_LIST, payload: id })
   }
   return {
     textUpdated,

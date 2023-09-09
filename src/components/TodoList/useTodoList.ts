@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { TodoListItem } from "../../utils/types"
 import { useGlobalContext } from "../../context/globalContext"
+import { ActionsEnum } from "../../reducer/enums"
 
 export default function useTodosList(items: TodoListItem[]) {
   const { dispatch } = useGlobalContext()
@@ -23,7 +24,7 @@ export default function useTodosList(items: TodoListItem[]) {
   }
 
   const handleDeleteTodos = () => {
-    dispatch({ type: "delete_todos", payload: todosListToDelete })
+    dispatch({ type: ActionsEnum.DELETE_TODOS, payload: todosListToDelete })
     setEnableMultipleDelete((state) => !state)
   }
 

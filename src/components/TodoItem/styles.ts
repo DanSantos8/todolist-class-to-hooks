@@ -37,7 +37,7 @@ export const Label = styled.label`
   cursor: pointer;
 `
 
-export const ControlButton = styled.button<{ isDanger?: boolean }>`
+export const ControlButton = styled.button<{ danger?: boolean }>`
   display: none;
   font-size: 12px;
   border-radius: 4px;
@@ -49,7 +49,7 @@ export const ControlButton = styled.button<{ isDanger?: boolean }>`
   margin: auto 8px auto auto;
 
   ${(props) =>
-    props.isDanger &&
+    props.danger &&
     css`
       background-color: #ff7675;
     `}

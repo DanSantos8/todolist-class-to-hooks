@@ -3,6 +3,8 @@ import { useGlobalContext } from "../../context/globalContext"
 import FormAddItem from "../FormAddItem"
 import FormList from "../FormList"
 import BackToList from "../BackToList"
+import "react-toastify/dist/ReactToastify.css"
+import { ToastContainer } from "react-toastify"
 
 export default function Todo() {
   const { state } = useGlobalContext()
@@ -13,6 +15,7 @@ export default function Todo() {
   return (
     <S.Layout>
       <S.Container>
+        <ToastContainer autoClose={2000} />
         {isTodoList && <BackToList />}
         <FormList />
         {!isEditing && <FormAddItem />}

@@ -12,7 +12,7 @@ export const Controls = styled.div`
 `
 
 export const ControlButton = styled.button<{
-  multipleDeleteEnabled?: boolean
+  danger?: boolean
 }>`
   font-size: 12px;
   font-weight: 500;
@@ -25,7 +25,7 @@ export const ControlButton = styled.button<{
   transition: all ease 0.5s;
 
   ${(props) =>
-    props.multipleDeleteEnabled &&
+    props.danger &&
     css`
       background-color: #ff7675;
     `}

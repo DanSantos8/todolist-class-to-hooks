@@ -1,4 +1,4 @@
-import { TodoListProps } from "../../utils/types"
+import { TodoListProps } from "./types"
 import TodoItem from "../TodoItem"
 import * as S from "./styles"
 import useTodosList from "./useTodoList"
@@ -18,7 +18,7 @@ export default function TodoList(props: TodoListProps) {
         <S.ControlButton
           type="button"
           onClick={() => handleEnableMultipleDelete()}
-          multipleDeleteEnabled={enableMultipleDelete}
+          danger={enableMultipleDelete}
         >
           {enableMultipleDelete ? "Cancel" : "Multiple Delete"}
         </S.ControlButton>

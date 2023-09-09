@@ -1,10 +1,11 @@
 import { useGlobalContext } from "../../context/globalContext"
+import { ActionsEnum } from "../../reducer/enums"
 
 export default function useBackToList() {
   const { dispatch, state } = useGlobalContext()
 
   const backToListTodos = () => {
-    dispatch({ type: "reset_active_list_todos" })
+    dispatch({ type: ActionsEnum.RESET_ACTIVE_LIST_TODOS })
   }
 
   const listId = state.activeListTodos.id

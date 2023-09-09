@@ -12,7 +12,10 @@ export default function Dropdown(props: {
     >
       {Object.keys(EmojisEnum).map((emoji) => {
         return (
-          <option value={EmojisEnum[emoji as keyof typeof EmojisEnum]}>
+          <option
+            value={EmojisEnum[emoji as keyof typeof EmojisEnum]}
+            key={emoji}
+          >
             {EmojisEnum[emoji as keyof typeof EmojisEnum]}
           </option>
         )

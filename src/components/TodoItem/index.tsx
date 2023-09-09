@@ -1,4 +1,4 @@
-import { TodoItemProps } from "../../utils/types"
+import { TodoItemProps } from "./types"
 import * as S from "./styles"
 import useTodoItem from "./useTodoItem"
 
@@ -66,7 +66,7 @@ export default function TodoItem(props: TodoItemProps) {
       </S.Label>
       {isEditing && (
         <>
-          <S.ControlButton onClick={() => handleEditItem()} isDanger>
+          <S.ControlButton onClick={() => handleEditItem()} danger>
             Cancel
           </S.ControlButton>
           <S.ControlButton onClick={() => handleApplyEdit(id)}>
@@ -78,7 +78,7 @@ export default function TodoItem(props: TodoItemProps) {
         <S.ControlButton onClick={() => handleEditItem()}>Edit</S.ControlButton>
       )}
 
-      <S.ControlButton type="button" onClick={() => deleteItem(id)} isDanger>
+      <S.ControlButton type="button" onClick={() => deleteItem(id)} danger>
         Delete
       </S.ControlButton>
     </S.TodoItem>

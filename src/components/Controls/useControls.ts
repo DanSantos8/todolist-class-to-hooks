@@ -1,28 +1,30 @@
-import { useState } from "react"
+import { toast } from "react-toastify"
 import { useGlobalContext } from "../../context/globalContext"
+import { ActionsEnum } from "../../reducer/enums"
 
 export default function useControls() {
   const {
     state: {
+      lists,
       controls: { isEditing },
     },
     dispatch,
   } = useGlobalContext()
-  const [isApplied, setIsApplied] = useState(false)
 
   const handleIsEditing = () => {
-    setIsApplied(false)
-    dispatch({ type: "toggle_edit", payload: !isEditing })
+    dispatch({ type: ActionsEnum.TOGGLE_EDIT, payload: !isEditing })
   }
 
-  const handleApply = () => {
-    setIsApplied(true)
+  const notify = () => {
+    toast.success("Your changes were applied!")
   }
+
+  const hasItems = !!lists.length
 
   return {
     handleIsEditing,
     isEditing,
-    isApplied,
-    handleApply,
+    notify,
+    hasItems,
   }
 }
