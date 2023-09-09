@@ -20,14 +20,14 @@ export const ControlButton = styled.button<{
   border-radius: 4px;
   padding: 4px 8px;
   border: none;
-  background-color: #00b894;
+  background-color: ${(props) => props.theme.colors.green};
   cursor: pointer;
   transition: all ease 0.5s;
 
   ${(props) =>
     props.danger &&
     css`
-      background-color: #ff7675;
+      background-color: ${(props) => props.theme.colors.red};
     `}
 `
 

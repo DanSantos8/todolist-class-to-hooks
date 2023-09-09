@@ -4,11 +4,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-
-  h1 {
-    font-size: 14px;
-    color: #333;
-  }
 `
 
 export const BackToListButton = styled.button`
@@ -20,4 +15,9 @@ export const BackToListButton = styled.button`
   border: none;
   cursor: pointer;
   font-weight: 500;
+`
+
+export const Head = styled.div`
+  display: flex;
+  gap: 8px;
 `

@@ -40,7 +40,7 @@ export const Remove = styled.button`
   color: white;
   font-weight: 700;
   border: none;
-  background-color: #ff7675;
+  background-color: ${(props) => props.theme.colors.red};
   cursor: pointer;
 `
 
@@ -49,7 +49,7 @@ export const TodosQuantity = styled.span`
   font-weight: 500;
   padding: 4px;
   background-color: #ccc;
-  color: #333;
+  color: ${(props) => props.theme.colors.black};
   margin: 0 8px;
   border-radius: 50%;
 `

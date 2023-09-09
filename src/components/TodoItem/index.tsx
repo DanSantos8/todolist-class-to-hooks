@@ -19,13 +19,12 @@ export default function TodoItem(props: TodoItemProps) {
     handleEditItem,
     handleApplyEdit,
     onChangeText,
+    highlight,
   } = useTodoItem(text)
 
-  //TODO Highlight newly added item for several seconds.
-
   return (
-    <S.TodoItem completed={completed}>
-      <S.Label>
+    <S.TodoItem className={highlight ? "highlight" : ""}>
+      <S.Label completed={completed}>
         <S.CustomCheckBox>
           {!isMultipleDeleteActive ? (
             <>

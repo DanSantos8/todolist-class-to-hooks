@@ -25,7 +25,7 @@ export const Container = styled.div`
 
 export const Title = styled.h3`
   font-size: 24px;
-  color: #333;
+  color: ${(props) => props.theme.colors.black};
   text-align: center;
   margin: 20px 0;
 `

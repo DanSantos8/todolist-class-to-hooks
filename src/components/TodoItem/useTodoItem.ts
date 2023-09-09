@@ -1,10 +1,11 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useGlobalContext } from "../../context/globalContext"
 import { ActionsEnum } from "../../reducer/enums"
 
 export default function useTodoItem(text: string) {
   const { dispatch } = useGlobalContext()
   const [newText, setNewText] = useState(text)
+  const [highlight, setHighlight] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
 
   const markCompleted = (itemId: number) => {
@@ -32,6 +33,16 @@ export default function useTodoItem(text: string) {
   const onChangeText = (e: React.ChangeEvent<HTMLInputElement>) =>
     setNewText(e.target.value)
 
+  useEffect(() => {
+    setHighlight(true)
+
+    return () => {
+      setTimeout(() => {
+        setHighlight(false)
+      }, 500)
+    }
+  }, [])
+
   return {
     deleteItem,
     markCompleted,
@@ -40,5 +51,6 @@ export default function useTodoItem(text: string) {
     newText,
     isEditing,
     onChangeText,
+    highlight,
   }
 }
