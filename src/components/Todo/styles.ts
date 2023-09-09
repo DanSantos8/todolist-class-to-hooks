@@ -7,7 +7,7 @@ export const Layout = styled.main`
   padding: 24px;
   align-items: center;
   justify-content: center;
-  max-width: 450px;
+  max-width: 768px;
   margin: auto;
   overflow-y: hidden;
 `

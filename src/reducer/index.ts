@@ -113,6 +113,63 @@ export function reducer(state: State, action: Action): State {
         },
       }
     }
+    case "edit_todo_item": {
+      const currentList = state.activeListTodos
+      const updatedTodos = state.activeListTodos.todos.map((todo) => {
+        if (todo.id === action.payload.itemId) {
+          return { ...todo, text: action.payload.text }
+        }
+
+        return todo
+      })
+
+      const updatedLists = state.lists.map((list) => {
+        if (list.id === currentList.id) {
+          return {
+            ...list,
+            todos: updatedTodos,
+          }
+        }
+
+        return list
+      })
+
+      return {
+        ...state,
+        lists: updatedLists,
+        activeListTodos: {
+          ...currentList,
+          todos: updatedTodos,
+        },
+      }
+    }
+    case "delete_todos": {
+      const currentList = state.activeListTodos
+      const updatedTodos = state.activeListTodos.todos.filter(
+        (todo) => !action.payload.includes(todo.id)
+      )
+
+      const updatedLists = state.lists.map((list) => {
+        if (list.id === currentList.id) {
+          return {
+            ...list,
+            todos: updatedTodos,
+          }
+        }
+
+        return list
+      })
+
+      return {
+        ...state,
+        lists: updatedLists,
+        activeListTodos: {
+          ...currentList,
+          todos: updatedTodos,
+        },
+      }
+      return state
+    }
     case "toggle_edit": {
       const currentList = state.activeListTodos.id
         ? state.activeListTodos.todos

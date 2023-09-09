@@ -6,7 +6,7 @@ export const Button = styled.button<{ isEditing?: boolean }>`
   border: none;
   color: white;
   border-radius: 4px;
-  padding: 8px 12px;
+  padding: 4px 8px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;

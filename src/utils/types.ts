@@ -10,6 +10,9 @@ export interface TodoItemProps {
   id: number
   text: string
   completed: boolean
+  isMultipleDeleteActive: boolean
+  todosListToDelete: number[]
+  handleTodosListToDelete: (itemId: number) => void
 }
 
 export interface TodoListProps {
@@ -42,6 +45,8 @@ export type Action =
   | { type: "edit_list_todos"; payload: { [key: number]: string } }
   | { type: "toggle_edit"; payload: boolean }
   | { type: "remove_list_todo"; payload: number }
+  | { type: "edit_todo_item"; payload: { itemId: number; text: string } }
+  | { type: "delete_todos"; payload: number[] }
 
 export interface State {
   controls: {
