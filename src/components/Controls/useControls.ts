@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { useGlobalContext } from "../../context/globalContext"
 
 export default function useControls() {
@@ -7,12 +8,21 @@ export default function useControls() {
     },
     dispatch,
   } = useGlobalContext()
-  const handleEditing = () => {
+  const [isApplied, setIsApplied] = useState(false)
+
+  const handleIsEditing = () => {
+    setIsApplied(false)
     dispatch({ type: "toggle_edit", payload: !isEditing })
   }
 
+  const handleApply = () => {
+    setIsApplied(true)
+  }
+
   return {
-    handleEditing,
+    handleIsEditing,
     isEditing,
+    isApplied,
+    handleApply,
   }
 }

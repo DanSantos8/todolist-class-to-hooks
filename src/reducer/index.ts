@@ -1,4 +1,4 @@
-import { Action, State } from "../utils/types"
+import { Action, IList, State } from "../utils/types"
 
 export function reducer(state: State, action: Action): State {
   switch (action.type) {
@@ -113,23 +113,50 @@ export function reducer(state: State, action: Action): State {
         },
       }
     }
-    case "edit_list_todos": {
-      const updatedListTodosList = state.lists.map((list) => {
-        return list.id === action.payload.id ? action.payload : list
-      })
-      return {
-        ...state,
-        lists: updatedListTodosList,
-      }
-    }
     case "toggle_edit": {
+      const currentList = state.activeListTodos.id
+        ? state.activeListTodos.todos
+        : state.lists
+
       return {
         ...state,
         controls: {
           isEditing: action.payload,
+          currentList: currentList as IList[],
         },
       }
     }
+    case "remove_list_todo": {
+      const updatedList = state.controls.currentList.filter(
+        (list) => list.id !== action.payload
+      ) as IList[]
+
+      return {
+        ...state,
+        controls: {
+          ...state.controls,
+          currentList: updatedList,
+        },
+      }
+    }
+    case "edit_list_todos": {
+      const newListsNames = action.payload
+
+      const updatedLists = state.controls.currentList.map((list) => {
+        return {
+          id: list.id,
+          emoji: list.emoji,
+          name: newListsNames[list.id],
+          todos: list.todos,
+        }
+      })
+
+      return {
+        ...state,
+        lists: updatedLists,
+      }
+    }
+
     default:
       return state
   }

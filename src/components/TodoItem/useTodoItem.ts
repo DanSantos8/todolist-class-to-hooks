@@ -1,7 +1,8 @@
 import { useGlobalContext } from "../../context/globalContext"
 
 export default function useTodoItem() {
-  const { dispatch } = useGlobalContext()
+  const { dispatch, state } = useGlobalContext()
+  console.log(state.activeListTodos)
   const markCompleted = (itemId: number) => {
     dispatch({ type: "update_status_todo", payload: itemId })
   }

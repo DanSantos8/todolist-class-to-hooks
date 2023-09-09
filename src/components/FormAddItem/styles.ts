@@ -12,19 +12,24 @@ export const TextInput = styled.input`
   font-size: 12px;
   padding: 10px;
   width: 100%;
-  border: 1px solid #ccc;
+  border: none;
+  border-bottom: 1px solid #ccc;
   border-radius: 4px;
   outline: none;
 `
 
 export const AddButton = styled.button`
-  background-color: #333;
-  color: #fff;
-  font-weight: 700;
-  font-size: 14px;
+  background-color: transparent;
+  color: #00b894;
+  font-weight: 500;
+  font-size: 22px;
   width: 25px;
   height: 25px;
   border: none;
   border-radius: 50%;
   cursor: pointer;
+
+  &:hover {
+    color: #74b9ff;
+  }
 `

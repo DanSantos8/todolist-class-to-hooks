@@ -8,22 +8,25 @@ export default function ListItem(props: ListItemProps) {
       controls: { isEditing },
     },
   } = useGlobalContext()
-  const { id, name, emoji, todosQuantity } = props
+  const { id, name, emoji, todosQuantity, register } = props
 
-  const { handleTextUpdated, textUpdated, openTodosList } = useListItem(name)
+  const { openTodosList, removeItem } = useListItem(name)
 
   return (
     <S.Item key={id}>
       <div>{emoji}</div>
       {isEditing && (
         <S.Input
-          value={textUpdated}
-          onChange={(e) => handleTextUpdated(e.target.value)}
+          {...register!(id.toString())}
+          defaultValue={name}
+          //onChange={(e) => handleTextUpdated(e.target.value)}
         />
       )}
       {!isEditing && (
         <S.Button onClick={() => openTodosList(id)}>{name}</S.Button>
       )}
+
+      {isEditing && <S.Remove onClick={() => removeItem(id)}>X</S.Remove>}
 
       <S.TodosQuantity>{todosQuantity}</S.TodosQuantity>
     </S.Item>

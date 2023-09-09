@@ -1,3 +1,5 @@
+import { UseFormRegister } from "react-hook-form"
+
 export interface TodoListItem {
   id: number
   text: string
@@ -22,6 +24,7 @@ export interface IList {
 }
 
 export interface ListItemProps {
+  register?: UseFormRegister<{ [key: string]: string }>
   id: number
   name: string
   emoji: string
@@ -36,12 +39,14 @@ export type Action =
   | { type: "reset_active_list_todos" }
   | { type: "update_status_todo"; payload: number }
   | { type: "remove_todo_item"; payload: number }
-  | { type: "edit_list_todos"; payload: IList }
+  | { type: "edit_list_todos"; payload: { [key: number]: string } }
   | { type: "toggle_edit"; payload: boolean }
+  | { type: "remove_list_todo"; payload: number }
 
 export interface State {
   controls: {
     isEditing: boolean
+    currentList: IList[]
   }
   lists: IList[]
   activeListTodos: {
@@ -53,6 +58,7 @@ export interface State {
 export const initialState: State = {
   controls: {
     isEditing: false,
+    currentList: [],
   },
   lists: [],
   activeListTodos: {
