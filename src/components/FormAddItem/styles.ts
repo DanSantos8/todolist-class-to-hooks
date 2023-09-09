@@ -23,7 +23,7 @@ export const AddButton = styled.button`
   color: #00b894;
   font-weight: 500;
   font-size: 22px;
-  width: 25px;
+  width: 30px;
   height: 25px;
   border: none;
   border-radius: 50%;

@@ -1,5 +1,5 @@
 import { useGlobalContext } from "../../context/globalContext"
-import { ListItemProps } from "../../utils/types"
+import { ListItemProps } from "./types"
 import * as S from "./styles"
 import useListItem from "./useListItem"
 export default function ListItem(props: ListItemProps) {
@@ -26,7 +26,7 @@ export default function ListItem(props: ListItemProps) {
         <S.Button onClick={() => openTodosList(id)}>{name}</S.Button>
       )}
 
-      {isEditing && <S.Remove onClick={() => removeItem(id)}>X</S.Remove>}
+      {isEditing && <S.Remove onClick={() => removeItem(id)}>Delete</S.Remove>}
 
       <S.TodosQuantity>{todosQuantity}</S.TodosQuantity>
     </S.Item>

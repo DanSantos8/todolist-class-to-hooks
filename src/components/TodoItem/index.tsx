@@ -1,29 +1,86 @@
-import { TodoItemProps } from "../../utils/types"
+import { TodoItemProps } from "./types"
 import * as S from "./styles"
 import useTodoItem from "./useTodoItem"
 
 export default function TodoItem(props: TodoItemProps) {
-  const { completed, id, text } = props
-  const { deleteItem, markCompleted } = useTodoItem()
+  const {
+    completed,
+    id,
+    text,
+    isMultipleDeleteActive,
+    handleTodosListToDelete,
+    todosListToDelete,
+  } = props
+  const {
+    deleteItem,
+    markCompleted,
+    newText,
+    isEditing,
+    handleEditItem,
+    handleApplyEdit,
+    onChangeText,
+  } = useTodoItem(text)
 
   //TODO Highlight newly added item for several seconds.
 
   return (
     <S.TodoItem completed={completed}>
-      <label>
-        <div className="custom-checkbox">
-          <input
-            type="checkbox"
-            defaultChecked={completed}
-            onChange={() => markCompleted(id)}
+      <S.Label>
+        <S.CustomCheckBox>
+          {!isMultipleDeleteActive ? (
+            <>
+              <S.Checkbox
+                type="checkbox"
+                checked={completed}
+                onChange={() => markCompleted(id)}
+              />
+              <S.CheckMark></S.CheckMark>
+            </>
+          ) : (
+            <>
+              <S.Checkbox
+                type="checkbox"
+                checked={todosListToDelete.includes(id)}
+                onChange={() => handleTodosListToDelete(id)}
+                isDelete={isMultipleDeleteActive}
+              />
+              <S.CheckMark></S.CheckMark>
+            </>
+          )}
+        </S.CustomCheckBox>
+        {isEditing ? (
+          <S.Input
+            type="text"
+            value={newText}
+            onChange={onChangeText}
+            autoFocus={true}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleApplyEdit(id)
+              }
+            }}
           />
-          <div className="checkmark"></div>
-        </div>
-        {text}
-      </label>
-      <S.Remove type="button" onClick={() => deleteItem(id)}>
-        x
-      </S.Remove>
+        ) : (
+          <span>{newText}</span>
+        )}
+      </S.Label>
+      {isEditing && (
+        <>
+          <S.ControlButton onClick={() => handleEditItem()} danger>
+            Cancel
+          </S.ControlButton>
+          <S.ControlButton onClick={() => handleApplyEdit(id)}>
+            Apply
+          </S.ControlButton>
+        </>
+      )}
+      {!isEditing && (
+        <S.ControlButton onClick={() => handleEditItem()}>Edit</S.ControlButton>
+      )}
+
+      <S.ControlButton type="button" onClick={() => deleteItem(id)} danger>
+        Delete
+      </S.ControlButton>
     </S.TodoItem>
   )
 }

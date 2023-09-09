@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from "react"
 import { useGlobalContext } from "../../context/globalContext"
 import { EmojisEnum } from "../../utils/enums"
+import { ActionsEnum } from "../../reducer/enums"
 
 export default function useForm() {
   const [text, setText] = useState("")
@@ -27,7 +28,7 @@ export default function useForm() {
       emoji,
       todos: [],
     }
-    dispatch({ type: "add_list_todos", payload: newList })
+    dispatch({ type: ActionsEnum.ADD_LIST_TODOS, payload: newList })
   }
 
   const handleTextChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +42,10 @@ export default function useForm() {
       done: false,
     }
 
-    dispatch({ type: "add_todo", payload: { item: newItem, listId: id } })
+    dispatch({
+      type: ActionsEnum.ADD_TODO,
+      payload: { item: newItem, listId: id },
+    })
   }
   return {
     handleEmoji,

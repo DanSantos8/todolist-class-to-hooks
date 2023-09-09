@@ -1,12 +1,20 @@
 import styled from "styled-components"
 
-export const Button = styled.button<{ isEditing?: boolean }>`
+export const Container = styled.div`
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 12px;
+`
+
+export const Button = styled.button<{ danger?: boolean }>`
   font-size: 12px;
-  background-color: ${(props) => (props.isEditing ? "#FF7675" : "#00b894")};
+  background-color: ${(props) => (props.danger ? "#FF7675" : "#00b894")};
   border: none;
   color: white;
   border-radius: 4px;
-  padding: 8px 12px;
+  padding: 4px 8px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -16,9 +24,9 @@ export const Button = styled.button<{ isEditing?: boolean }>`
   }
 `
 
-export const Container = styled.div`
-  display: flex;
-  gap: 8px;
-  justify-content: flex-end;
-  margin-bottom: 12px;
+export const Applied = styled.span`
+  font-size: 12px;
+  font-weight: 500;
+  color: #00b894;
+  text-decoration: underline;
 `

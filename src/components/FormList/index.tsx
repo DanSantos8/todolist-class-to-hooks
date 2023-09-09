@@ -1,3 +1,4 @@
+import { ActionsEnum } from "../../reducer/enums"
 import { IList } from "../../utils/types"
 import Controls from "../Controls"
 import List from "../List"
@@ -9,7 +10,7 @@ export default function FormList() {
     useFormList()
 
   const onSubmit = (data: { [key: number]: string }) => {
-    dispatch({ type: "edit_list_todos", payload: data })
+    dispatch({ type: ActionsEnum.EDIT_LIST_TODOS, payload: data })
   }
 
   const submit = handleSubmit(onSubmit)

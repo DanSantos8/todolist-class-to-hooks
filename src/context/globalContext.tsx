@@ -1,6 +1,7 @@
 import { createContext, useContext, useReducer } from "react"
 import { reducer } from "../reducer"
-import { Action, State, initialState } from "../utils/types"
+import {} from "../utils/types"
+import { Action, State, initialState } from "../reducer/types"
 
 const GlobalContext = createContext<{
   state: State

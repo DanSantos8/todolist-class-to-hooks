@@ -50,7 +50,7 @@ export const TodosQuantity = styled.span`
   padding: 4px;
   background-color: #ccc;
   color: #333;
-  margin: 0 4px;
+  margin: 0 8px;
   border-radius: 50%;
 `
 
