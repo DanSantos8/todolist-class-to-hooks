@@ -6,23 +6,24 @@ export default function TodoItem(props: TodoItemProps) {
   const { completed, id, text } = props
   const { deleteItem, markCompleted } = useTodoItem()
 
-  const itemClass = "form-check todoitem " + (completed ? "done" : "undone")
-
   //TODO Highlight newly added item for several seconds.
 
   return (
-    <S.TodoItem className={itemClass}>
+    <S.TodoItem completed={completed}>
       <label>
-        <input
-          type="checkbox"
-          defaultChecked={completed}
-          onChange={() => markCompleted(id)}
-        />
+        <div className="custom-checkbox">
+          <input
+            type="checkbox"
+            defaultChecked={completed}
+            onChange={() => markCompleted(id)}
+          />
+          <div className="checkmark"></div>
+        </div>
         {text}
       </label>
-      <button type="button" onClick={() => deleteItem(id)}>
+      <S.Remove type="button" onClick={() => deleteItem(id)}>
         x
-      </button>
+      </S.Remove>
     </S.TodoItem>
   )
 }

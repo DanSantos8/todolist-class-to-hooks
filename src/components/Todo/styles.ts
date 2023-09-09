@@ -30,13 +30,4 @@ export const Title = styled.h3`
   margin: 20px 0;
 `
 
-export const BackToListButton = styled.button`
-  color: #333;
-  background-color: transparent;
-  font-size: 12px;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-`
-
 export const TaskList = styled.div``

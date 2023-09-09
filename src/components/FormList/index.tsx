@@ -16,7 +16,7 @@ export default function FormList() {
 
   return (
     <form onSubmit={submit}>
-      <Controls />
+      {!isTodoList && <Controls />}
       {isTodoList ? (
         <TodoList items={state.activeListTodos.todos} />
       ) : (
