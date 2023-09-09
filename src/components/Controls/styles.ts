@@ -20,13 +20,13 @@ export const Button = styled.button<{ danger?: boolean }>`
   transition: all 0.2s ease;
 
   &:hover {
-    background-color: #74b9ff;
+    background-color: ${(props) => props.theme.colors.blue};
   }
 `
 
 export const Applied = styled.span`
   font-size: 12px;
   font-weight: 500;
-  color: #00b894;
+  color: ${(props) => props.theme.colors.green};
   text-decoration: underline;
 `

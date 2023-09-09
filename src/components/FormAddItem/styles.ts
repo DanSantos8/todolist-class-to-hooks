@@ -20,7 +20,7 @@ export const TextInput = styled.input`
 
 export const AddButton = styled.button`
   background-color: transparent;
-  color: #00b894;
+  color: ${(props) => props.theme.colors.green};
   font-weight: 500;
   font-size: 22px;
   width: 30px;
@@ -30,6 +30,6 @@ export const AddButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    color: #74b9ff;
+    color: ${(props) => props.theme.colors.blue};
   }
 `

@@ -1,23 +1,35 @@
 import styled, { css } from "styled-components"
 
-export const TodoItem = styled.li<{ completed: boolean }>`
+export const TodoItem = styled.li`
   display: flex;
   gap: 8px;
   font-size: 12px;
   font-weight: 400;
   padding: 8px 4px;
   transition: all 0.2s ease;
-  border-bottom: 1px solid transparent;
-  border-top: 1px solid transparent;
+  border-radius: 4px;
+
+  &.highlight {
+    background-color: ${(props) => props.theme.colors.green};
+  }
 
   &:hover {
-    border-color: #ccc;
-    box-shadow: 0px 0px 2px black;
-
+    background-image: linear-gradient(to left, #aed6f1, #fff);
     button {
       display: block;
     }
   }
+`
+
+export const Label = styled.label<{ completed: boolean }>`
+  display: flex;
+  font-weight: 500;
+  width: calc(100% - 40px);
+  min-height: 30px;
+  align-items: center;
+  gap: 8px;
+  padding-left: 4px;
+  cursor: pointer;
 
   ${(props) =>
     props.completed &&
@@ -27,16 +39,6 @@ export const TodoItem = styled.li<{ completed: boolean }>`
     `}
 `
 
-export const Label = styled.label`
-  display: flex;
-  font-weight: 500;
-  width: calc(100% - 40px);
-  min-height: 30px;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-`
-
 export const ControlButton = styled.button<{ danger?: boolean }>`
   display: none;
   font-size: 12px;
@@ -44,14 +46,15 @@ export const ControlButton = styled.button<{ danger?: boolean }>`
   color: white;
   font-weight: 700;
   border: none;
-  background-color: #00b894;
+  background-color: ${(props) => props.theme.colors.green};
   cursor: pointer;
   margin: auto 8px auto auto;
+  text-decoration: none;
 
   ${(props) =>
     props.danger &&
     css`
-      background-color: #ff7675;
+      background-color: ${(props) => props.theme.colors.red};
     `}
 `
 
@@ -101,8 +104,8 @@ export const Checkbox = styled.input<{ isDelete?: boolean }>`
     props.isDelete &&
     css`
       &:checked + ${CheckMark} {
-        background-color: #ff7675;
-        border: 1px solid #ff7675;
+        background-color: ${(props) => props.theme.colors.red};
+        border: 1px solid ${(props) => props.theme.colors.red};
       }
     `}
 `
@@ -111,4 +114,5 @@ export const Input = styled.input`
   width: 100%;
   border: none;
   outline: none;
+  background: transparent;
 `

@@ -1,10 +1,14 @@
+import { ThemeProvider } from "styled-components"
 import Todo from "./components/Todo"
 import { GlobalContextProvider } from "./context/globalContext"
+import { theme } from "./theme"
 
 function TodoApp() {
   return (
     <GlobalContextProvider>
-      <Todo />
+      <ThemeProvider theme={theme}>
+        <Todo />
+      </ThemeProvider>
     </GlobalContextProvider>
   )
 }

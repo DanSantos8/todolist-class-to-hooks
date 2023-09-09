@@ -10,10 +10,11 @@ export default function useBackToList() {
 
   const listId = state.activeListTodos.id
 
-  const listName = state.lists.find((list) => list.id === listId)?.name
+  const currentList = state.lists.find((list) => list.id === listId)
 
   return {
     backToListTodos,
-    listName,
+    listName: currentList?.name,
+    emoji: currentList?.emoji,
   }
 }
