@@ -19,6 +19,7 @@ export type Action =
       payload: { itemId: number; text: string }
     }
   | { type: ActionsEnum.DELETE_TODOS; payload: number[] }
+  | { type: "restore_state"; payload: State }
 
 export interface State {
   controls: {

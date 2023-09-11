@@ -210,6 +210,9 @@ export function reducer(state: State, action: Action): State {
         lists: updatedLists,
       }
     }
+    case ActionsEnum.RESTORE_STATE: {
+      return { ...action.payload }
+    }
 
     default:
       return state

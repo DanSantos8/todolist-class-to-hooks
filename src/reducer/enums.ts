@@ -10,4 +10,5 @@ export enum ActionsEnum {
   REMOVE_TODOS_LIST = "remove_todos_list",
   EDIT_TODO_ITEM = "edit_todo_item",
   DELETE_TODOS = "delete_todos",
+  RESTORE_STATE = "restore_state",
 }
