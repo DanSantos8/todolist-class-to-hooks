@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react"
+import { createContext, useContext, useEffect, useReducer } from "react"
 import { reducer } from "../reducer"
 import {} from "../utils/types"
 import { Action, State, initialState } from "../reducer/types"
@@ -11,7 +11,14 @@ const GlobalContext = createContext<{
 export const GlobalContextProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [state, dispatch] = useReducer(reducer, initialState, (initial) => {
+    const savedState = localStorage.getItem("todoListState")
+    return savedState ? JSON.parse(savedState) : initial
+  })
+
+  useEffect(() => {
+    localStorage.setItem("todoListState", JSON.stringify(state))
+  }, [state])
 
   return (
     <GlobalContext.Provider value={{ state, dispatch }}>
